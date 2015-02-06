@@ -60,5 +60,10 @@ namespace ActionTool
         {
             return _count;
         }
+
+        public override void SetValue(System.Object value)
+        {
+             _count = (int) value;
+        }
     }
 }

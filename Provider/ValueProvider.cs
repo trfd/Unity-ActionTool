@@ -70,6 +70,20 @@ namespace ActionTool
            return default(T);
         }
 
+        public void SetValue(T value)
+        {
+            switch (_kind)
+            {
+                case ProviderKind.ACTION_VARIABLE: _actionVariable.SetValue(value);
+                    break;
+                case ProviderKind.OBJECT_MEMBER: _nestedDataMember.SetValue(value);
+                    break;
+                case ProviderKind.CONSTANT_VALUE:
+                    Debug.Log("Can not set value of contant");
+                    break;
+            }
+        }
+
         #region Static Interface 
 
         #region ActionVariable

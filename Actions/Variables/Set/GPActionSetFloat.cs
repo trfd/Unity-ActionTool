@@ -1,10 +1,10 @@
 ﻿//
-// GPActionDeclInt.cs
+// GPActionSetFloat.cs
 //
-// Author(s):
+// Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
 //
-// Copyright (c) 2014
+// Copyright (c) 2014 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,35 +24,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace ActionTool
 {
-	[GPActionNoInput]
-	[GPActionAlias("Variable/Int/Declaration")]
-	public class GPActionDeclInt : GPActionVariable 
-	{
-		#region Public Members
-		
-		public int _value;
-		
-		#endregion
-		
-		#region GPActionVariable Override
-		
-		public override object GetValue ()
-		{
-			return _value;
-		}
+    [GPActionAlias("Variables/Set Float")]
+    public class GPActionSetFloat : GPAction
+    {
+        public FloatValueProvider _variable;
+        public FloatValueProvider _newValue;
 
-        public override void SetValue(System.Object value)
+        protected override void OnTrigger()
         {
-            _value = (int) value;
+            _variable.SetValue(_newValue.GetValue());
+            End();
         }
-
-		#endregion
-	}
+    }
 }
