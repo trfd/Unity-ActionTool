@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetVector4Component.cs
+// GPActionSetVector4.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,36 +30,23 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Vector4/Set Vector4 Component")]
-	public class GPActionSetVector4Component : GPAction
+	public enum Vector2Component
     {
-		public Vector4Component _component;
-        public Vector4ValueProvider _variable;
-        public FloatValueProvider _newValue;
+        X,Y
+    }
 
-        protected override void OnTrigger()
-        {
-			Vector4 v = _variable.GetValue();
+    public enum Vector3Component
+    {
+        X,Y,Z
+    }
 
-			switch(_component)
-			{
-			case Vector4Component.X:
-				v.x = _newValue.GetValue();
-				break;
-			case Vector4Component.Y:
-				v.y = _newValue.GetValue();
-				break;
-			case Vector4Component.Z:
-				v.z = _newValue.GetValue();
-				break;
-			case Vector4Component.W:
-				v.w = _newValue.GetValue();
-				break;
-			}
+    public enum Vector4Component
+    {
+        X,Y,Z,W
+    }
 
-			_variable.SetValue(v);
-      		
-			End();
-        }
+    public enum ColorComponent
+    {
+        R,G,B,A
     }
 }

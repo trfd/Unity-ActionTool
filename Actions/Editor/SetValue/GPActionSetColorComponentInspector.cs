@@ -46,8 +46,7 @@ namespace ActionTool
 		{
 			GPActionSetColorComponent action = (GPActionSetColorComponent) TargetAction;
 
-			action._component = (GPActionSetColorComponent.ColorComponent) 
-				EditorGUILayout.EnumPopup("Component", action._component);
+			action._component = (ColorComponent) EditorGUILayout.EnumPopup("Component", action._component);
 
 			// Provider A
 

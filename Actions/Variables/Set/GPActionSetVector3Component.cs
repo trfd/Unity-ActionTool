@@ -33,13 +33,7 @@ namespace ActionTool
     [GPActionAlias("Variable/Vector3/Set Vector3 Component")]
 	public class GPActionSetVector3Component : GPAction
     {
-		public enum Vector3Component
-		{
-			X,
-			Y,
-			Z
-		}
-
+	
 		public Vector3Component _component;
         public Vector3ValueProvider _variable;
         public FloatValueProvider _newValue;

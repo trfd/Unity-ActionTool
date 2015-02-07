@@ -33,14 +33,6 @@ namespace ActionTool
     [GPActionAlias("Variable/Color/Set Color Component")]
 	public class GPActionSetColorComponent : GPAction
     {
-		public enum ColorComponent
-		{
-			R,
-			G,
-			B,
-			A
-		}
-
 		public ColorComponent _component;
         public ColorValueProvider _variable;
         public FloatValueProvider _newValue;

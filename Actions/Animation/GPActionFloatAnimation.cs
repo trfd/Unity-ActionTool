@@ -17,9 +17,7 @@ namespace ActionTool
 
 		#region Public Members
 
-		public Component _component;
-
-		public DataMemberWrapper _member;
+        public FloatValueProvider _provider;
 
 		public float _duration;
 
@@ -31,13 +29,6 @@ namespace ActionTool
 
 		protected override void OnTrigger()
 		{
-			if(_component == null || _member == null || _member.GetMember() == null)
-			{
-				End();
-				Debug.LogError("Null Component or Member");
-				return;
-			}
-
 			m_timer = new Timer(_duration);
 		}
 
@@ -49,7 +40,7 @@ namespace ActionTool
 				return;
 			}
 
-			_member.SetValue(_component, _curve.Evaluate(1f - m_timer.CurrentNormalized));
+            _provider.SetValue(_curve.Evaluate(1f - m_timer.CurrentNormalized));
 		}
 
 		#endregion

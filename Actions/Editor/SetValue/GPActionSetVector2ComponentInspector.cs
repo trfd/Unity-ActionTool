@@ -46,8 +46,7 @@ namespace ActionTool
 		{
 			GPActionSetVector2Component action = (GPActionSetVector2Component) TargetAction;
 
-			action._component = (GPActionSetVector2Component.Vector2Component) 
-				EditorGUILayout.EnumPopup("Component", action._component);
+			action._component = (Vector2Component) EditorGUILayout.EnumPopup("Component", action._component);
 
 			// Provider A
 

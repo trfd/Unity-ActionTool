@@ -53,7 +53,7 @@ namespace ActionTool
         public GameObject _object;
         public ComponentNestedDataMemberWrapper _nestedDataMember;
         public GPActionVariable _actionVariable;
-		public GPActionRelatedObject _relatedObject;
+		//public GPActionRelatedObject _relatedObject;
         public T _constValue;
 
         #endregion
