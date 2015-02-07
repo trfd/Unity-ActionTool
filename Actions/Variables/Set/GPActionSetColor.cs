@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetColor.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/Color/Set Color Value")]
+    public class GPActionSetColor : GPAction
     {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+        public ColorValueProvider _variable;
+        public ColorValueProvider _newValue;
 
         protected override void OnTrigger()
         {

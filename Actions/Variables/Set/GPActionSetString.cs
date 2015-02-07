@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetString.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/String/Set String Value")]
+    public class GPActionSetString : GPAction
     {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+        public StringValueProvider _variable;
+        public StringValueProvider _newValue;
 
         protected override void OnTrigger()
         {

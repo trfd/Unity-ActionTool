@@ -1,10 +1,10 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionDeclVector3.cs
 //
-// Author:
+// Author(s):
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
 //
-// Copyright (c) 2014 
+// Copyright (c) 2014
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,22 +24,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
-    {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+	[GPActionNoInput]
+	[GPActionAlias("Variable/Vector3/Declaration")]
+	public class GPActionDeclVector3 : GPActionVariable 
+	{
+		#region Public Members
+		
+		public Vector3 _value;
+		
+		#endregion
+		
+		#region GPActionVariable Override
+		
+		public override object GetValue ()
+		{
+			return _value;
+		}
 
-        protected override void OnTrigger()
+        public override void SetValue(System.Object value)
         {
-            _variable.SetValue(_newValue.GetValue());
-            End();
+			_value = (Vector3) value;
         }
-    }
+
+		#endregion
+	}
 }

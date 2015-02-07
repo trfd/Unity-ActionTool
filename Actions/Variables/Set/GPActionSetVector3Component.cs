@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetVector3Component.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,16 +30,40 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/Vector3/Set Vector3 Component")]
+	public class GPActionSetVector3Component : GPAction
     {
-        public FloatValueProvider _variable;
+		public enum Vector3Component
+		{
+			X,
+			Y,
+			Z
+		}
+
+		public Vector3Component _component;
+        public Vector3ValueProvider _variable;
         public FloatValueProvider _newValue;
 
         protected override void OnTrigger()
         {
-            _variable.SetValue(_newValue.GetValue());
-            End();
+			Vector3 v = _variable.GetValue();
+
+			switch(_component)
+			{
+			case Vector3Component.X:
+				v.x = _newValue.GetValue();
+				break;
+			case Vector3Component.Y:
+				v.y = _newValue.GetValue();
+				break;
+			case Vector3Component.Z:
+				v.z = _newValue.GetValue();
+				break;
+			}
+
+			_variable.SetValue(v);
+      		
+			End();
         }
     }
 }

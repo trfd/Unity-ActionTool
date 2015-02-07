@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetBool.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/Bool/Set Bool Value")]
+    public class GPActionSetBool : GPAction
     {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+        public BoolValueProvider _variable;
+		public BoolValueProvider _newValue;
 
         protected override void OnTrigger()
         {

@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetGameObject.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/GameObject/Set GameObject Value")]
+    public class GPActionSetGameObject: GPAction
     {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+		public GameObjectValueProvider _variable;
+		public GameObjectValueProvider _newValue;
 
         protected override void OnTrigger()
         {

@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetColorComponent.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,16 +30,44 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+    [GPActionAlias("Variable/Color/Set Color Component")]
+	public class GPActionSetColorComponent : GPAction
     {
-        public FloatValueProvider _variable;
+		public enum ColorComponent
+		{
+			R,
+			G,
+			B,
+			A
+		}
+
+		public ColorComponent _component;
+        public ColorValueProvider _variable;
         public FloatValueProvider _newValue;
 
         protected override void OnTrigger()
         {
-            _variable.SetValue(_newValue.GetValue());
-            End();
+			Color c = _variable.GetValue();
+
+			switch(_component)
+			{
+			case ColorComponent.R:
+				c.r = _newValue.GetValue();
+				break;
+			case ColorComponent.G:
+				c.g = _newValue.GetValue();
+				break;
+			case ColorComponent.B:
+				c.b = _newValue.GetValue();
+				break;
+			case ColorComponent.A:
+				c.a = _newValue.GetValue();
+				break;
+			}
+
+			_variable.SetValue(c);
+      		
+			End();
         }
     }
 }

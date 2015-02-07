@@ -1,5 +1,5 @@
 ﻿//
-// GPActionSetFloat.cs
+// GPActionSetVector4.cs
 //
 // Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
@@ -30,11 +30,11 @@ using System.Collections.Generic;
 
 namespace ActionTool
 {
-    [GPActionAlias("Variable/Float/Set Float Value")]
-    public class GPActionSetFloat : GPAction
+	[GPActionAlias("Variable/Vector4/Set Vector4 Value")]
+	public class GPActionSetVector4 : GPAction
     {
-        public FloatValueProvider _variable;
-        public FloatValueProvider _newValue;
+		public Vector4ValueProvider _variable;
+		public Vector4ValueProvider _newValue;
 
         protected override void OnTrigger()
         {
