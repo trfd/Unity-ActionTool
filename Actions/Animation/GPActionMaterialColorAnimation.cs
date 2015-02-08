@@ -35,8 +35,8 @@ namespace ActionTool
     /// Anim shader color
     /// </summary>
     [System.Serializable]
-    [GPActionHide]
-    public class GPActionMaterialColorAnimation : GPActionMaterialPropertyAnimation
+    [GPActionAlias("Animation/Material/Color")]
+    public class GPActionMaterialColorAnimation : GPActionMaterialAnimation
     {
         #region Public Members
 
@@ -50,7 +50,7 @@ namespace ActionTool
 
         protected override void OnTrigger()
         {
-            m_timer = new Timer(_parent._duration);
+            m_timer = new Timer(_duration);
         }
 
         protected override void OnUpdate()
@@ -65,7 +65,7 @@ namespace ActionTool
             Color c = _colorMap.Evaluate(
                 _curve.Evaluate(1f - m_timer.CurrentNormalized));
 
-            _parent.Material.SetColor(_parent._animatedVariable, c);
+           	Material.SetColor(_animatedVariable, c);
         }
 
         #endregion
