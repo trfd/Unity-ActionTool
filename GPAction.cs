@@ -155,7 +155,12 @@ namespace ActionTool
 		/// <value>The parent game object.</value>
 		public GameObject ParentGameObject
 		{
-			get{ return m_parentHandler.gameObject; }
+            get
+            {
+                if (m_parentHandler == null)
+                    return null;
+                return m_parentHandler.gameObject; 
+            }
 		}
 
 		/// <summary>
