@@ -44,6 +44,10 @@ namespace ActionTool
             return null;
         }
 
+        public virtual void SetValue(System.Object value)
+        {
+        }
+
 		#if UNITY_EDITOR
 		
 		public override void DrawWindowContent()

@@ -53,6 +53,7 @@ namespace ActionTool
         public GameObject _object;
         public ComponentNestedDataMemberWrapper _nestedDataMember;
         public GPActionVariable _actionVariable;
+		//public GPActionRelatedObject _relatedObject;
         public T _constValue;
 
         #endregion
@@ -62,12 +63,26 @@ namespace ActionTool
         {
            switch(_kind)
            {
-               case ProviderKind.ACTION_VARIABLE: return (T) _actionVariable.GetValue();
-               case ProviderKind.OBJECT_MEMBER: return (T) _nestedDataMember.GetValue();
-               case ProviderKind.CONSTANT_VALUE: return _constValue;
+				case ProviderKind.ACTION_VARIABLE: return (T) _actionVariable.GetValue();
+               	case ProviderKind.OBJECT_MEMBER:   return (T) _nestedDataMember.GetValue();
+               	case ProviderKind.CONSTANT_VALUE:  return _constValue;
            }
 
            return default(T);
+        }
+
+        public void SetValue(T value)
+        {
+            switch (_kind)
+            {
+                case ProviderKind.ACTION_VARIABLE: _actionVariable.SetValue(value);
+                    break;
+                case ProviderKind.OBJECT_MEMBER: _nestedDataMember.SetValue(value);
+                    break;
+                case ProviderKind.CONSTANT_VALUE:
+                    Debug.Log("Can not set value of contant");
+                    break;
+            }
         }
 
         #region Static Interface 
@@ -121,5 +136,25 @@ namespace ActionTool
 
 	[System.Serializable]
 	public class GameObjectValueProvider : ValueProvider<GameObject>
+	{}
+
+	[System.Serializable]
+	public class ObjectValueProvider : ValueProvider<UnityEngine.Object>
+	{}
+
+	[System.Serializable]
+	public class Vector2ValueProvider : ValueProvider<Vector2>
+	{}
+
+	[System.Serializable]
+	public class Vector3ValueProvider : ValueProvider<Vector3>
+	{}
+
+	[System.Serializable]
+	public class Vector4ValueProvider : ValueProvider<Vector4>
+	{}
+
+	[System.Serializable]
+	public class ColorValueProvider : ValueProvider<Color>
 	{}
 }

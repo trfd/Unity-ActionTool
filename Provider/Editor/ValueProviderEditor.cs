@@ -70,7 +70,8 @@ namespace ActionTool
             if (kind != Provider._kind)
                 ChangeKind(kind);
 
-			if(Provider._kind == ProviderKind.ACTION_VARIABLE || Provider._kind == ProviderKind.OBJECT_MEMBER)
+			if(Provider._kind == ProviderKind.ACTION_VARIABLE || 
+			   Provider._kind == ProviderKind.OBJECT_MEMBER)
 			{
 				GameObject obj = (GameObject)EditorGUILayout.ObjectField(Provider._object, typeof(GameObject),true);
 
