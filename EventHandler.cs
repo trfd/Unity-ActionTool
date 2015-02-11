@@ -259,13 +259,13 @@ namespace ActionTool
 
 		void OnTriggerEnter(Collider other)
 		{
-			if(_eventID.Name == "OnCollisionEnter")
+			if(_eventID.Name == "OnTriggerEnter")
 				this.EventTrigger(_eventID,other.gameObject);
 		}
 		
 		void OnTriggerExit(Collider other)
 		{
-			if(_eventID.Name == "OnCollisionExit")
+            if (_eventID.Name == "OnTriggerExit")
 				this.EventTrigger(_eventID,other.gameObject);
 		}
 
