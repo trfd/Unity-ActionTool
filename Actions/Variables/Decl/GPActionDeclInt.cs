@@ -48,6 +48,11 @@ namespace ActionTool
 			return _value;
 		}
 
+        public override void SetValue(System.Object value)
+        {
+            _value = (int) value;
+        }
+
 		#endregion
 	}
 }

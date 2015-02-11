@@ -35,12 +35,12 @@ namespace ActionTool
     /// Anim shader float
     /// </summary>
     [System.Serializable]
-    [GPActionHide]
-    public class GPActionMaterialFloatAnimation : GPActionMaterialPropertyAnimation
+    [GPActionAlias("Animation/Material/Float")]
+    public class GPActionMaterialFloatAnimation : GPActionMaterialAnimation
     {
         #region Public Members
 
-        public RandomAnimationCurve _curve;
+        public AnimationCurve _curve;
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace ActionTool
 
         protected override void OnTrigger()
         {
-            m_timer = new Timer(_parent._duration);
+            m_timer = new Timer(_duration);
         }
 
         protected override void OnUpdate()
@@ -60,8 +60,8 @@ namespace ActionTool
                 return;
             }
 
-            _parent.Material.SetFloat(_parent._animatedVariable,
-                                      _curve.Evaluate(1f - m_timer.CurrentNormalized));
+            Material.SetFloat(_animatedVariable,
+			                  _curve.Evaluate(1f - m_timer.CurrentNormalized));
         }
 
         #endregion

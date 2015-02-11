@@ -1,10 +1,10 @@
 ﻿//
-// GPActionMaterialPropertyAnimation.cs
+// GPActionSetObject.cs
 //
-// Author(s):
+// Author:
 //       Baptiste Dupy <baptiste.dupy@gmail.com>
 //
-// Copyright (c) 2014
+// Copyright (c) 2014 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -28,32 +28,18 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-using Utils;
-
 namespace ActionTool
 {
-    [System.Serializable]
-    [GPActionHide]
-    public class GPActionMaterialPropertyAnimation : GPAction
+    [GPActionAlias("Variable/Object/Set Object Value")]
+	public class GPActionSetObject : GPAction
     {
-        #region Protected Members
+        public ObjectValueProvider _variable;
+        public ObjectValueProvider _newValue;
 
-        /// <summary>
-        /// Animation Timer.
-        /// </summary>
-        protected Timer m_timer;
-
-        #endregion
-
-        #region Public Members
-
-        [UnityEngine.HideInInspector]
-        public GPActionMaterialAnimation _parent;
-
-        #endregion
-
-		#region GPAction Override
-	
-		#endregion
+        protected override void OnTrigger()
+        {
+            _variable.SetValue(_newValue.GetValue());
+            End();
+        }
     }
 }

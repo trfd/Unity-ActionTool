@@ -68,6 +68,11 @@ namespace ActionTool
 			return _trigger;
 		}
 
+        public override void SetValue(System.Object value)
+        {
+            _trigger = (bool)value;
+        }
+
 		#endregion
 	}
 }

@@ -117,6 +117,11 @@ namespace ActionTool
 			return m_timeElapsed;
 		}
 
+        public override void SetValue(System.Object value)
+        {
+            m_timeElapsed = (float)value;
+        }
+
 		#endregion
 	}
 }
