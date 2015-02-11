@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 using Utils;
 
@@ -10,7 +11,7 @@ namespace ActionTool
 
         #region Public Members
 
-        public GPEventID _event;
+        public List<GPEventID> _events;
 
         [HideInInspector]
         public ObjectFilter _filter; 
@@ -21,13 +22,16 @@ namespace ActionTool
         {
             if (_filter.IsValid(collider.gameObject))
             {
-                EventManager.Instance.PostEvent(_event.Name);
-                SendMessage("OnGPTrigger", _event.Name);
+                foreach(GPEventID evt in _events)
+                {
+                    EventManager.Instance.PostEvent(evt.Name);  
+                }
+
+                SendMessage("OnGPTrigger", collider.gameObject);
             }
 
+           
         }
-
-
     }
 
 }
