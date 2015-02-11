@@ -96,7 +96,8 @@ namespace ActionTool
 
 			for(int i = 0; i<properties.Length ; i++)
 			{
-				if(ShaderUtil.GetPropertyType(shader,i) == ShaderUtil.ShaderPropertyType.Float)
+				if(ShaderUtil.GetPropertyType(shader,i) == ShaderUtil.ShaderPropertyType.Float ||
+                   ShaderUtil.GetPropertyType(shader, i) == ShaderUtil.ShaderPropertyType.Range)
 				{
 					floatProperties.Add(properties[i]);
 					indexProperties.Add(i);
