@@ -20,8 +20,14 @@ namespace ActionTool
         void OnTriggerEnter(Collider collider)
         {
             if (_filter.IsValid(collider.gameObject))
+            {
                 EventManager.Instance.PostEvent(_event.Name);
+                SendMessage("OnGPTrigger", _event.Name);
+            }
+
         }
+
+
     }
 
 }
