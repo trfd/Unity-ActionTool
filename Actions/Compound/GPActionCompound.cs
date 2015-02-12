@@ -156,6 +156,8 @@ namespace ActionTool
 
 		#endregion
 
+#if UNITY_EDITOR
+
 		#region Nodes
 
 		protected override void CreateNodes()
@@ -190,12 +192,12 @@ namespace ActionTool
 		}
 
 		#endregion
-
+#endif
 		#endregion
 
 		#region IActionOwner
-
-		public void Connect(GPAction child)
+#if UNITY_EDITOR
+        public void Connect(GPAction child)
 		{
 			AddAction(child);
 		}
@@ -218,20 +220,25 @@ namespace ActionTool
 
 			m_actions.Clear();
 
+
+
 			CreateAllRightNodes();
+
 		}
+#endif
+        #endregion
 
-		#endregion
+        #region ISerializable Callback
 
-		#region ISerializable Callback
-
-		public void OnBeforeSerialize()
+        public void OnBeforeSerialize()
 		{
 		}
 
 		public void OnAfterDeserialize()
 		{
+#if UNITY_EDITOR
 			CreateAllRightNodes();
+#endif
 		}
 
 		#endregion

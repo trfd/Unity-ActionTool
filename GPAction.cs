@@ -13,10 +13,12 @@ namespace ActionTool
 
 	public interface INodeOwner
 	{
+#if UNITY_EDITOR
 		Rect WindowRect
 		{
 			get; set;
 		}
+#endif
 	}
 
 	[System.Serializable]
@@ -32,6 +34,7 @@ namespace ActionTool
 
 		public void Draw()
 		{
+#if UNITY_EDITOR
 			if(_selected)
 				Handles.color = Color.white;
 			else
@@ -41,6 +44,7 @@ namespace ActionTool
 				Handles.DrawWireDisc((Vector3)_center,Vector3.forward,5);
 			else
 				Handles.DrawSolidDisc((Vector3)_center,Vector3.forward,5);
+#endif
 		}
 	}
 	
@@ -192,7 +196,9 @@ namespace ActionTool
 
 		public GPAction()
 		{
+#if UNITY_EDITOR
 			CreateNodes();
+#endif
 		}
 
 		#endregion
@@ -278,7 +284,12 @@ namespace ActionTool
 			OnTerminate();
         }
 
-		#region Node
+
+        #endregion
+
+#if UNITY_EDITOR
+
+        #region Node
 
 		protected virtual void CreateNodes()
 		{
@@ -316,14 +327,10 @@ namespace ActionTool
 
 			return _rightNodes.Last();
 		}
-        
-		#endregion
 
         #endregion
 
-#if UNITY_EDITOR
-
-		public virtual void DrawWindowContent()
+        public virtual void DrawWindowContent()
 		{
 		}
 
@@ -332,9 +339,11 @@ namespace ActionTool
 
 	public interface IActionOwner 
 	{
+#if UNITY_EDITOR
 		void Connect(GPAction child);
 		void Disconnect(GPAction child);
 		void DisconnectAll();
+#endif
 	}
 }
 
