@@ -288,9 +288,11 @@ namespace ActionTool
 			AddEventName(-7, "OnDisable");
 			AddEventName(-8, "EvtInteract");
 			AddEventName(-9, "EvtInteractibleEnter");
-			AddEventName(-10,"EvtInteractibleStay");
-			AddEventName(-11,"EvtInteractibleExit");
-			AddEventName(-12,"EvtTrigger");
+			AddEventName(-10,"EvtInteractibleExit");
+			AddEventName(-11,"EvtTrigger");
+            AddEventName(-12, "EvtPickupTake");
+            AddEventName(-13, "EvtPickupAcquired");
+            AddEventName(-14, "EvtPickupRelease");
 
 			m_reservedEventsAdded = true;
 		}
