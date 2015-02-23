@@ -293,6 +293,7 @@ namespace ActionTool
             AddEventName(-12, "EvtPickupTake");
             AddEventName(-13, "EvtPickupAcquired");
             AddEventName(-14, "EvtPickupRelease");
+            AddEventName(-15, "EvtPickupKeyholeUnlock");
 
 			m_reservedEventsAdded = true;
 		}
