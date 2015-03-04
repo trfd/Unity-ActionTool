@@ -84,8 +84,11 @@ namespace ActionTool
 
 			if(ActionAtIndex(m_currActionIndex).HasEnded)
 			{
+                Log.Debug("Sequence Ends Action" + ActionAtIndex(m_currActionIndex).GetType().Name + " on " + ParentGameObject.name);
+
                 if (ActionAtIndex(m_currActionIndex).State == ActionState.FAILURE)
                 {
+                    Log.Debug("End Sequence FAILURE" + ParentGameObject.name);
                     End(ActionState.FAILURE);
                     return;
                 }
@@ -94,13 +97,17 @@ namespace ActionTool
 
 				m_currActionIndex++;
 
-				if(m_currActionIndex >= ActionCount())
-				{ 
-					End(ActionState.TERMINATED); 
-					return;
-				}
-				else
-					ActionAtIndex(m_currActionIndex).Trigger();
+                if (m_currActionIndex >= ActionCount())
+                {
+                    Log.Debug("End Sequence TERMINATED" + ParentGameObject.name);
+                    End(ActionState.TERMINATED);
+                    return;
+                }
+                else
+                {
+                    Log.Debug("Sequence Starts Action" + ActionAtIndex(m_currActionIndex).GetType().Name + " on " + ParentGameObject.name);
+                    ActionAtIndex(m_currActionIndex).Trigger();
+                }
 			}
 			else
 			{

@@ -196,9 +196,8 @@ namespace ActionTool
 
         void Start()
         {
-			if(m_relativeObjectAction == null)
-				m_relativeObjectAction = (GPActionRelatedObject) GetGPActionObjectMapperOrCreate()
-					.AddAction(this,typeof(GPActionRelatedObject));
+            m_relativeObjectAction = GetGPActionObjectMapperOrCreate()
+                    .GetRelatedObject(this);
 
 			if(!Application.isPlaying)
 				return;

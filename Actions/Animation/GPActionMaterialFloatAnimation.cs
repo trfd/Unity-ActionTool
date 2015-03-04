@@ -48,6 +48,7 @@ namespace ActionTool
 
         protected override void OnTrigger()
         {
+            ChangeMaterial();
             m_timer = new Timer(_duration);
         }
 

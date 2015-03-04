@@ -46,6 +46,10 @@ namespace ActionTool
 		[UnityEngine.HideInInspector]
 		private Material m_material;
 
+        [UnityEngine.SerializeField]
+        [UnityEngine.HideInInspector]
+        private Renderer m_renderer;
+
 		#endregion
 
 		#region Protected Members
@@ -68,6 +72,8 @@ namespace ActionTool
 		/// The key of animated variable.
 		/// </summary>
 		public string _animatedVariable;
+
+        public bool _useRenderer;
 	
 		#endregion
 
@@ -93,6 +99,7 @@ namespace ActionTool
 			set{ m_material = value; CheckMaterial(); }
 		}
 
+
 		#endregion
 
 		#region Action Override
@@ -101,7 +108,7 @@ namespace ActionTool
 
 		#region Internal
 
-		private void ChangeMaterial()
+		protected void ChangeMaterial()
 		{
 			if(m_useThis)
 			{

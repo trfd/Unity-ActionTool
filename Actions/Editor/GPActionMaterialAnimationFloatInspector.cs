@@ -47,7 +47,19 @@ namespace ActionTool
 		{
 			GPActionMaterialFloatAnimation anim = (GPActionMaterialFloatAnimation) TargetAction;
 
-			anim.UseThisObject = EditorGUILayout.Toggle("Use This Object",anim.UseThisObject);
+            if (anim == null)
+                 throw new System.NullReferenceException("Null Target Action");
+
+            if(anim.ParentGameObject == null)
+                throw new System.NullReferenceException("Null ParentGameObject");
+
+            bool useThisObj = EditorGUILayout.Toggle("Use This Renderer",anim.UseThisObject);
+
+			if(anim.UseThisObject != useThisObj)
+            {
+                anim.UseThisObject = useThisObj;
+                CreatePropertyList(anim.Material.shader);
+            }
 
 			Material newMaterial = (Material) EditorGUILayout.ObjectField("Material",anim.Material,typeof(Material),true);
 
@@ -77,9 +89,9 @@ namespace ActionTool
 			anim._duration = EditorGUILayout.FloatField("Duration",anim._duration);
 			anim._curve    = EditorGUILayout.CurveField("Curve"   ,anim._curve);
 
-			if(anim.UseThisObject && anim.ParentGameObject.GetComponent<Renderer>())
+			if(anim.UseThisObject && anim.ParentGameObject.GetComponent<Renderer>() == null)
 			{
-				EditorGUILayout.HelpBox("'Use This Action' requires a Renderer in the GameObject",MessageType.Error);
+				EditorGUILayout.HelpBox("'Use This Renderer' requires a Renderer in the GameObject",MessageType.Error);
 			}
 		}
 

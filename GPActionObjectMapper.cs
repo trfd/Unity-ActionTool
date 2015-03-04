@@ -93,6 +93,9 @@ namespace ActionTool
         {
 			GameObject holder = CreateGPActionHolderObject(handler);
             m_actionObjectMap.Dictionary.Add(handler, holder);
+
+            CheckAndAddHolderComponent(holder, handler);
+
 			return holder;
         }
 
@@ -116,6 +119,48 @@ namespace ActionTool
 				holder = AddEventHandler(handler);
 
             return (GPAction) holder.AddComponent(actionType);
+        }
+
+        public GPActionRelatedObject GetRelatedObject(EventHandler handler)
+        {
+            if (handler == null)
+                throw new System.ArgumentNullException();
+
+            if (!typeof(GPAction).IsAssignableFrom(typeof(GPActionRelatedObject)))
+                throw new System.ArgumentException("Type 'actionType' must inherit from GPAction");
+
+            GameObject holder;
+
+            if (!m_actionObjectMap.Dictionary.TryGetValue(handler, out holder))
+                holder = AddEventHandler(handler);
+
+            GPActionRelatedObject[] relObjs = holder.GetComponents<GPActionRelatedObject>();
+
+            GPActionRelatedObject relObj;
+
+            if(relObjs.Length > 0)
+            {
+                relObj = relObjs[0];
+
+                if (relObjs.Length >1)
+                    for (int i = 1; i < relObjs.Length; i++)
+                    {
+#if UNITY_EDITOR
+                        if(UnityEditor.EditorApplication.isPlaying)
+                            Destroy(relObjs[i]);
+                        else
+                            DestroyImmediate(relObjs[i]);
+#else
+                        Destroy(relObjs[i]);
+#endif
+                    }
+            }
+            else
+            {
+                relObj = holder.AddComponent<GPActionRelatedObject>();
+            }
+
+            return relObj;
         }
 
 		/// <summary>
@@ -143,10 +188,20 @@ namespace ActionTool
 			GameObject holder;
 			
 			if(m_actionObjectMap.Dictionary.TryGetValue(handler, out holder))
-				return holder.GetComponents<GPAction>();
+            {
+                CheckAndAddHolderComponent(holder,handler);
+                return holder.GetComponents<GPAction>();
+            }
+				
 		
 			return new GPAction[0];
 		}
+
+        public void CheckAndAddHolderComponent(GameObject holder, EventHandler handler)
+        {
+            GPActionHolder holderComponent = holder.AddComponent<GPActionHolder>();
+            holderComponent._eventHandler = handler;
+        }
 
 #if UNITY_EDITOR
 

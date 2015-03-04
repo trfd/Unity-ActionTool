@@ -84,7 +84,7 @@ namespace ActionTool
 
         #region Private Members
 
-		[UnityEngine.HideInInspector]
+		//[UnityEngine.HideInInspector]
 		[UnityEngine.SerializeField]
 		private EventHandler m_parentHandler;
 
@@ -162,7 +162,18 @@ namespace ActionTool
             get
             {
                 if (m_parentHandler == null)
+                {
+                    GPActionHolder holder = GetComponent<GPActionHolder>();
+
+                    if (holder == null)
+                        Debug.LogError("GPActionHolder not found");
+                    else
+                        m_parentHandler = holder._eventHandler;
+                }
+
+                if (m_parentHandler == null)
                     return null;
+
                 return m_parentHandler.gameObject; 
             }
 		}
@@ -173,7 +184,20 @@ namespace ActionTool
 		/// <value>The parent handler.</value>
 		public EventHandler ParentHandler
 		{
-			get{ return m_parentHandler; }
+			get
+            { 
+                if(m_parentHandler == null)
+                {
+                    GPActionHolder holder = GetComponent<GPActionHolder>();
+
+                    if (holder == null)
+                        Debug.LogError("GPActionHolder not found");
+                    else
+                        m_parentHandler = holder._eventHandler;
+                }
+                    
+                return m_parentHandler; 
+            }
 			set
 			{
 				SetParentHandler(value);

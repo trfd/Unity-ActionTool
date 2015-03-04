@@ -48,7 +48,7 @@ namespace ActionTool
         /// </summary>
         protected override void OnTrigger()
         {
-            Debug.Log(_message);
+            Log.Debug(_message);
 
             End();
         }
