@@ -430,7 +430,7 @@ namespace ActionTool
                 GPEventID evtID = EventNameToID(evtName);
 
                 if (evtID == GPEventID.Invalid)
-                    throw new KeyNotFoundException();
+                    throw new IndexOutOfRangeException();
 
                 EventHandler handlerToTrigger = null;
                 
@@ -445,7 +445,6 @@ namespace ActionTool
                         else
                             Debug.LogError("Several handler listening to "+evtID.Name+" found in object "+
                                 postToObj.name+". Only the first handler will be triggered");
-                       
                     }
                 }
 
@@ -468,8 +467,9 @@ namespace ActionTool
                 else
                     throw new KeyNotFoundException();
             }
-            catch (KeyNotFoundException)
+            catch (System.Exception e )
             {
+                Debug.Log("Exception: " + e.Message+" Stack "+e.StackTrace);
             }
         }
 

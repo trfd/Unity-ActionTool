@@ -199,8 +199,27 @@ namespace ActionTool
 
         public void CheckAndAddHolderComponent(GameObject holder, EventHandler handler)
         {
-            GPActionHolder holderComponent = holder.AddComponent<GPActionHolder>();
-            holderComponent._eventHandler = handler;
+            GPActionHolder[] holders = holder.GetComponents<GPActionHolder>();
+
+            if(holders.Length > 1)
+            {
+                for (int i = 1; i < holders.Length; i++)
+                {
+#if UNITY_EDITOR
+                    if (UnityEditor.EditorApplication.isPlaying)
+                        DestroyImmediate(holders[i]);
+                    else
+                        DestroyImmediate(holders[i]);
+#else
+                    Destroy(holders[i]);
+#endif
+                }
+            }
+            else
+            {
+                GPActionHolder holderComponent = holder.AddComponent<GPActionHolder>();
+                holderComponent._eventHandler = handler;
+            }
         }
 
 #if UNITY_EDITOR

@@ -299,7 +299,7 @@ namespace ActionTool
             if(_eventID == GPEventID.Invalid)
                 throw new System.Exception("Null event name");
 
-            EventManager.Instance.Register(_eventID.ID, EventTrigger);
+           EventManager.Instance.Register(_eventID.ID, EventTrigger);
 
 			if(Action != null)
 				Action.SetParentHandler(this);
@@ -307,7 +307,7 @@ namespace ActionTool
 
         public void EventTrigger(GPEvent evt)
         {
-            if (!evt.EventID.Equals(_eventID) || Action == null)
+           if (!evt.EventID.Equals(_eventID) || Action == null)
                 return;
 
 			CurrentEvent = evt;
