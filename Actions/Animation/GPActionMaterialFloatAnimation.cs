@@ -65,6 +65,12 @@ namespace ActionTool
 			                  _curve.Evaluate(1f - m_timer.CurrentNormalized));
         }
 
+        protected override void OnTerminate()
+        {
+            Material.SetFloat(_animatedVariable,
+                             _curve.Evaluate(1f));
+        }
+
         #endregion
     }
 		

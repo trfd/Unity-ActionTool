@@ -43,6 +43,11 @@ namespace ActionTool
             _provider.SetValue(_curve.Evaluate(1f - m_timer.CurrentNormalized));
 		}
 
+        protected override void OnTerminate()
+        {
+            _provider.SetValue(_curve.Evaluate(1f));
+        }
+
 		#endregion
 	}
 }
