@@ -38,12 +38,24 @@ namespace ActionTool
             STANDARD,
             ASYNC
         }
-        
+        public enum AsyncLoadAction
+        {
+            PLAY_WHEN_READY,
+            WAIT_FOR_ACTIVATE,
+            ACTIVATE
+        }
+        #region Private Members
+
+        private static AsyncOperation M_AsyncLoadBuffer;
+
+        #endregion
+
         #region Public Members
 
         public string m_name;
 
         public LoadMode _mode;
+        public AsyncLoadAction _asyncLoadAction = AsyncLoadAction.PLAY_WHEN_READY;
 
         #endregion
 
@@ -54,12 +66,42 @@ namespace ActionTool
 		/// </summary>
 		protected override void OnTrigger()
 		{
-            if(_mode == LoadMode.STANDARD)
+            if(_mode == LoadMode.STANDARD){
                 Application.LoadLevel(m_name);
+            }
             else if (_mode == LoadMode.ASYNC)
-                Application.LoadLevelAsync(m_name);
+            {
+                switch (_asyncLoadAction)
+                {
+                    case AsyncLoadAction.PLAY_WHEN_READY :
+                        Application.LoadLevelAsync(m_name);
+                        break;
 
+                    case AsyncLoadAction.WAIT_FOR_ACTIVATE :
+                        if (M_AsyncLoadBuffer != null) 
+                        {
+                            if (!M_AsyncLoadBuffer.isDone)
+                                Debug.LogWarning("An Async Level Loading is already waiting! It will be overidden by the action.");
+                        }    
+                        M_AsyncLoadBuffer = Application.LoadLevelAsync(m_name);
+                        M_AsyncLoadBuffer.allowSceneActivation = false;
+                        break;
+
+                    case AsyncLoadAction.ACTIVATE :
+                        if (M_AsyncLoadBuffer == null)
+                        {
+                            Debug.LogError("There is no Async Level loading waiting for activation. Abort !");
+                        }
+                        else
+                        {
+                            M_AsyncLoadBuffer.allowSceneActivation = true;
+                        }
+                        break;
+                }
+                
+            }
 			End();
+
 		}
 		
 		#endregion

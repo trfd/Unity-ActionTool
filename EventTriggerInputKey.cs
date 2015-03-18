@@ -7,8 +7,16 @@ namespace ActionTool
 	public class EventTriggerInputKey : MonoBehaviour
 	{
 		#region Public Members
+        public enum InputType
+        {
+            KEYCODE,
+            INPUTNAME
+        }
 
-		public KeyCode _key;
+        public InputType _inputType = InputType.KEYCODE;
+
+		public KeyCode _keyCode;
+        public string _inputName;
 
 		public GPEventID _eventID;
 
@@ -18,8 +26,23 @@ namespace ActionTool
 
 		void Update () 
 		{
-			if(Input.GetKeyDown(_key))
-				EventManager.Instance.PostEvent(_eventID.Name);
+            bool eventFlag = false;
+
+            switch (_inputType)
+            {
+                case InputType.KEYCODE:
+                    eventFlag = Input.GetKeyDown(_keyCode);
+                    break;
+                case InputType.INPUTNAME:
+                    eventFlag = Input.GetButtonDown(_inputName);
+                    break;
+            }
+
+            if (eventFlag)
+            {
+                EventManager.Instance.PostEvent(_eventID.Name);
+            }
+			
 		}
 
 		#endregion
