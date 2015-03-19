@@ -34,7 +34,7 @@ namespace ActionTool
 	/// Move the parent object according to start/end point. 
 	/// This impl. is based on MoveBehaviour.
 	/// </summary>
-	[GPActionAlias("Basic/Move To")]
+	[GPActionAlias("Basic/Move To (obsolet)")]
 	public class GPActionMoveTo : GPAction
 	{
 		#region Private Members
