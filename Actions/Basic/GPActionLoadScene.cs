@@ -59,6 +59,15 @@ namespace ActionTool
 
         #endregion
 
+		#region Properties
+
+		public AsyncOperation LoadingOp
+		{
+			get{ return M_AsyncLoadBuffer; }
+		}
+
+		#endregion
+
         #region GPAction Override
 
         /// <summary>
@@ -80,8 +89,7 @@ namespace ActionTool
                     case AsyncLoadAction.WAIT_FOR_ACTIVATE :
                         if (M_AsyncLoadBuffer != null) 
                         {
-                            if (!M_AsyncLoadBuffer.isDone)
-                                Debug.LogWarning("An Async Level Loading is already waiting! It will be overidden by the action.");
+                            Debug.LogWarning("An Async Level Loading is already waiting! It will be overidden by the action.");
                         }    
                         M_AsyncLoadBuffer = Application.LoadLevelAsync(m_name);
                         M_AsyncLoadBuffer.allowSceneActivation = false;
